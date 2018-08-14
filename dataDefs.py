@@ -8,21 +8,19 @@ Created on Fri Aug 10 00:13:31 2018
 import numpy as np
 import pandas as pd
 
-def labeler(dataList):
+def quartileLabeler(dataList):
+
+    nuLabels =[]
     
-    uniqueData = dataList.unique()
+    for i in range(len(dataList)):
     
-    numUniqueData = len(uniqueData)
+        if dataList.iloc[i]<=129975:
+            nuLabels.append(0)
+        elif dataList.iloc[i]>129975 and dataList.iloc[i]<=163000:
+            nuLabels.append(1)
+        elif dataList.iloc[i]>163000 and dataList.iloc[i]<=214000:
+            nuLabels.append(2)
+        elif dataList.iloc[i]>214000:
+            nuLabels.append(3)
     
-    labelList = []
-    
-    initial = 1
-    
-    for i in range(numUniqueData):
-        
-        labelList.append([uniqueData[i],initial])
-        initial = initial +1
-    
-    final = pd.DataFrame(labelList)
-    
-    return final
+    return nuLabels
